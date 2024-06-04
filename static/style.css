@@ -1,0 +1,63 @@
+body{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+
+.bg-costum{
+    background-color: rgb(212,212,212);
+    
+    height: 55px;
+    
+}
+
+.wrapper{
+    display:flex;
+}
+
+.mini-wrapper{
+    width: 100%;
+}
+
+
+#sidebar{
+    min-height: 100vh;
+    background-color: #073572;
+    flex-direction: column;
+    
+   
+    
+}
+
+.sidebar-nav{
+    flex: 1 1 auto;
+}
+
+.sidebar-nav a{
+    text-decoration: none;
+    color: white;
+}
+
+.sidebar-nav li{
+    list-style: none;
+    text-decoration: none;
+    margin-bottom: 40px;
+
+}
+
+.sidebar-nav ul{
+    padding: 0;
+
+}
+
+.main-content{
+    width: 100%;
+}
+
+.logo-costum{
+ width: 130px;
+}

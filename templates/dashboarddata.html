@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PneumoX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/dashboarddata.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+      <!--sidebar section-->
+      <aside id="sidebar">
+        <div class="d-flex pt-2">
+          <div class="logo-costum mb-2">
+            <img src="../static/img/PneumoX.png" alt="" class="img-fluid" width="120px" height="30px">
+          </div>
+        </div>
+        <ul class="sidebar-nav p-3">
+          <li class="sidebar-item">
+            <a href="/dashboard"><i class="fa-solid fa-file-import"></i> input</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/dashboardoutput"><i class="fa-solid fa-database"></i> Output</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          </li>
+        </ul>
+      </aside>
+      <div class="mini-wrapper">
+        <!--Navbar Section-->
+        <div class="navbar-container">
+          <nav class="navbar bg-body-tertiary bg-costum">
+            <div class="container"></div>
+          </nav>
+        </div>
+        <!--main content section-->
+        <div class="main-content p-3">
+          <table class="table table-costum">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nama Pasien</th>
+                <th scope="col">Umur</th>
+                <th scope="col">Jenis Kelamin</th>
+                <th scope="col">Diagnosa</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in value %}
+              <tr>
+                <td>{{ row.id_pasien }}</td>
+                <td>{{ row.nama_pasien }}</td>
+                <td>{{ row.umur_pasien }}</td>
+                <td>{{ row.jenis_kelamin }}</td>
+                <td class="{% if row.diagnosa == 'pneumonia' %}pneumonia{% elif row.diagnosa == 'normal' %}normal{% endif %}">{{ row.diagnosa }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>    
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PneumoX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+      <!--sidebar section-->
+      <aside id="sidebar">
+        <div class="d-flex pt-2">
+          <div class="logo-costum mb-2">
+            <img src="../static/img/PneumoX.png" alt="" class="img-fluid" width="120px" height="30px">
+          </div>
+        </div>
+        <ul class="sidebar-nav p-3">
+          <li class="sidebar-item">
+            <a href="/dashboard"><i class="fa-solid fa-file-import"></i> input</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/dashboardoutput"><i class="fa-solid fa-database"></i> Output</a>
+          </li>
+          <li class="sidebar-item">
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          </li>
+        </ul>
+      </aside>
+      <div class="mini-wrapper">
+        <!--Navbar Section-->
+        <div class="navbar-container">
+          <nav class="navbar bg-body-tertiary bg-costum">
+            <div class="container"></div>
+          </nav>
+        </div>
+        <!--main content section-->
+        <div class="main-content p-3">
+          <form class="form-costum" action='/predict', method="post" enctype="multipart/form-data" id="formsubmit">
+              <h1>Isi Data</h1>
+              <hr>
+              <div class="mb-3">
+                <label for="namapasien" class="form-label">Nama</label>
+                <input type="text" class="form-control" id="namapasien" name="namapasien" required>
+              </div>
+              <div class="mb-3">
+                  <label for="usia" class="form-label">Usia</label>
+                  <input type="number" class="form-control" id="usia" name="usia" required>
+                </div>
+                <div class="mb-3">
+                  <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                  <select  id="jeniskelamin" class="form-select" name="jeniskelamin">
+                      <option selected disabled hidden>Pilih</option>
+                      <option value="Laki-laki">Laki-laki</option>
+                      <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+              <div class="mb-3">
+                <label for="imagefile" class="form-label">Gambar X-Ray Dada</label>
+                <input class="form-control" type="file" name="imagefile" required>
+              </div>
+              <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit</button>
+            </form>
+        </div>
+      </div>    
+    </div>
+    <script src="../static/script.js"></script>
+</body>
+</html>
