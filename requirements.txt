@@ -1,0 +1,6 @@
+Flask
+numpy
+pillow
+flask-mysqldb
+keras
+tensorflow
