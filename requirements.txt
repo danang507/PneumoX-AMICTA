@@ -4,3 +4,4 @@ pillow
 flask-mysqldb
 keras
 tensorflow
+matplotlib

@@ -1,16 +1,15 @@
 body{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 500 !important;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 14px !important;
 }
 
 
 .bg-costum{
     background-color: rgb(212,212,212);
-    
     height: 55px;
     
 }
@@ -28,9 +27,8 @@ body{
     min-height: 100vh;
     background-color: #073572;
     flex-direction: column;
-    
-   
-    
+    border-top-right-radius: 5px; 
+    border-bottom-right-radius: 5px;     
 }
 
 .sidebar-nav{
@@ -60,4 +58,9 @@ body{
 
 .logo-costum{
  width: 130px;
+}
+
+
+.costum-footer{
+    color: black;
 }

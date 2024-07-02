@@ -4,17 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PneumoX</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="../static/dashboarddata.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css">
+
 </head>
 <body>
     <div class="wrapper">
       <!--sidebar section-->
       <aside id="sidebar">
-        <div class="d-flex pt-2">
+        <div class="d-flex p-2">
           <div class="logo-costum mb-2">
             <img src="../static/img/PneumoX.png" alt="" class="img-fluid" width="120px" height="30px">
           </div>
@@ -27,43 +31,135 @@
             <a href="/dashboardoutput"><i class="fa-solid fa-database"></i> Output</a>
           </li>
           <li class="sidebar-item">
+            <a href="/statistic"><i class="fa-solid fa-chart-simple"></i> Statistic</a>
+          </li>
+          <li class="sidebar-item">
             <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
           </li>
         </ul>
       </aside>
-      <div class="mini-wrapper">
-        <!--Navbar Section-->
-        <div class="navbar-container">
-          <nav class="navbar bg-body-tertiary bg-costum">
-            <div class="container"></div>
-          </nav>
-        </div>
+      <div class="mini-wrapper d-flex flex-column min-vh-100">
         <!--main content section-->
         <div class="main-content p-3">
-          <table class="table table-costum">
+          <table id="example" class="table table-striped table-costum" style="width:100%;">
             <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nama Pasien</th>
-                <th scope="col">Umur</th>
-                <th scope="col">Jenis Kelamin</th>
-                <th scope="col">Diagnosa</th>
-              </tr>
+                <tr>
+                    <th>Id</th>
+                    <th>Nama Pasien</th>
+                    <th>No Identitas</th>
+                    <th>Umur</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Diagnosa</th>
+                    <th>Fitur</th>
+                </tr>
             </thead>
             <tbody>
               {% for row in value %}
               <tr>
                 <td>{{ row.id_pasien }}</td>
                 <td>{{ row.nama_pasien }}</td>
+                <td>{{ row.no_identitas }}</td>
                 <td>{{ row.umur_pasien }}</td>
                 <td>{{ row.jenis_kelamin }}</td>
                 <td class="{% if row.diagnosa == 'pneumonia' %}pneumonia{% elif row.diagnosa == 'normal' %}normal{% endif %}">{{ row.diagnosa }}</td>
+                <td>
+                  <div style="display: inline-block;">
+                    <a href="/update/{{row.id_pasien}}" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id_pasien}}">Edit</a>
+                  </div>
+                  <div style="display: inline-block;">
+                    <form id="deleteForm" method="POST" action="/delete/{{ row.id_pasien }}" onsubmit="return confirmDelete(event)">
+                      <input type="submit" value="Delete" class="btn btn-danger btn-sm">
+                    </form>
+                  </div>
+                </td>
               </tr>
+              <!-- Enter New Student Modal -->
+              <div id="modaledit{{row.id_pasien}}" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+          
+                        <div class="modal-header">
+                            <h5 class="modal-title text-primary" style="align-content: center; color: #073572 !important;">Update patient Data</h5>    
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          
+        
+                        <div class="modal-body">
+                            
+                            <form id="form-update" action="{{ url_for('update')}}" method="POST">
+                                <input type="hidden" name="id" value="{{row.id_pasien}}">
+                                <div class="form-group">
+                                  <label>Name</label>
+                                  <input value="{{row.nama_pasien}}" type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Enter Full Name">
+                                </div>
+                                <div class="form-group">
+                                  <label>No identitas</label>
+                                  <input value="{{row.no_identitas}}" type="text" name="identitas" class="form-control" id="exampleFormControlInput2" placeholder="No identitas">
+                                </div>
+                                <div class="form-group">
+                                  <label>Usia</label>
+                                  <input value="{{row.umur_pasien}}" type="text" name="usia" class="form-control" id="exampleFormControlInput2" placeholder="usia">
+                                </div>
+                                <div class="form-group">
+                                  <label>Jenis Kelamin</label>
+                                  <select name="jenis_kelamin" class="form-control">
+                                      <option value="Laki-laki" {{ 'selected' if row.jenis_kelamin == 'Laki-laki' else '' }}>Laki-laki</option>
+                                      <option value="Perempuan" {{ 'selected' if row.jenis_kelamin == 'Perempuan' else '' }}>Perempuan</option>
+                                  </select>
+                                </div>
+                                  <button type="submit" class="btn btn-success mb-2">Update</button>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              
               {% endfor %}
             </tbody>
           </table>
         </div>
+        <!-- notifikasi delete data-->
+        <!-- Modal untuk Konfirmasi Penghapusan -->
+        <div id="confirmationModal" class="modal fade" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title">Warning!</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <p>Are you sure you want to delete?</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" onclick="deleteConfirmed()">Yes</button>
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+
+      <!--footer-->
+        <footer class="mt-auto py-3 bg-light">
+          <div class="container text-center">
+            <span class="text-muted">PneumoX © 2024</span>
+          </div>
+          </footer>
       </div>    
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+    <script src="../static/dashboarddata.js"></script>
+    <script src="../static/script.js"></script>
+    <script>
+      $(document).ready(function() {
+            $('#example').DataTable();
+            });
+
+
+        
+    </script>
 </body>
 </html>

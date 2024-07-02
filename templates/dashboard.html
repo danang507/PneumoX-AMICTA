@@ -14,7 +14,7 @@
     <div class="wrapper">
       <!--sidebar section-->
       <aside id="sidebar">
-        <div class="d-flex pt-2">
+        <div class="d-flex p-2">
           <div class="logo-costum mb-2">
             <img src="../static/img/PneumoX.png" alt="" class="img-fluid" width="120px" height="30px">
           </div>
@@ -27,47 +27,74 @@
             <a href="/dashboardoutput"><i class="fa-solid fa-database"></i> Output</a>
           </li>
           <li class="sidebar-item">
+            <a href="/statistic"><i class="fa-solid fa-chart-simple"></i> Statistic</a>
+          </li>
+          <li class="sidebar-item">
             <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
           </li>
         </ul>
       </aside>
-      <div class="mini-wrapper">
-        <!--Navbar Section-->
-        <div class="navbar-container">
-          <nav class="navbar bg-body-tertiary bg-costum">
-            <div class="container"></div>
-          </nav>
-        </div>
+      <div class="mini-wrapper d-flex flex-column min-vh-100">
         <!--main content section-->
         <div class="main-content p-3">
           <form class="form-costum" action='/predict', method="post" enctype="multipart/form-data" id="formsubmit">
-              <h1>Isi Data</h1>
+              <h2>Input Data</h2>
               <hr>
               <div class="mb-3">
-                <label for="namapasien" class="form-label">Nama</label>
+                <label for="namapasien" class="form-label">Name</label>
                 <input type="text" class="form-control" id="namapasien" name="namapasien" required>
               </div>
               <div class="mb-3">
-                  <label for="usia" class="form-label">Usia</label>
+                <label for="identitas" class="form-label">Identity number</label>
+                <input type="number" class="form-control" id="identitas" name="identitas" required>
+              </div>
+              <div class="mb-3">
+                  <label for="usia" class="form-label">Age</label>
                   <input type="number" class="form-control" id="usia" name="usia" required>
                 </div>
                 <div class="mb-3">
-                  <label for="jeniskelamin" class="form-label">Jenis Kelamin</label>
+                  <label for="jeniskelamin" class="form-label">Gender</label>
                   <select  id="jeniskelamin" class="form-select" name="jeniskelamin">
-                      <option selected disabled hidden>Pilih</option>
-                      <option value="Laki-laki">Laki-laki</option>
-                      <option value="Perempuan">Perempuan</option>
+                      <option selected disabled hidden>Choose</option>
+                      <option value="Laki-laki">Laki-laki (Male)</option>
+                      <option value="Perempuan">Perempuan (Female)</option>
                     </select>
                 </div>
               <div class="mb-3">
-                <label for="imagefile" class="form-label">Gambar X-Ray Dada</label>
+                <label for="imagefile" class="form-label">Chest X-Ray Image</label>
                 <input class="form-control" type="file" name="imagefile" required>
               </div>
               <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit</button>
             </form>
         </div>
+        <!-- Modal Konfirmasi Submit -->
+        <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="confirmationModalLabel">Confirm Data</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to send this data?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="confirmSubmit">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>  
+                  </div>
+              </div>
+          </div>
+        </div>
+        <footer class="mt-auto py-3 bg-light">
+          <div class="container text-center">
+            <span class="text-muted">PneumoX © 2024</span>
+          </div>
+          </footer>
       </div>    
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="../static/script.js"></script>
 </body>
 </html>
