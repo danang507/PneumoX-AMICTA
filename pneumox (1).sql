@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2024 pada 14.04
+-- Waktu pembuatan: 08 Jul 2024 pada 18.10
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -30,7 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `pasien` (
   `id_pasien` int(11) NOT NULL,
   `nama_pasien` varchar(255) NOT NULL,
-  `umur_pasien` varchar(255) NOT NULL,
+  `no_identitas` varchar(255) NOT NULL,
+  `umur_pasien` int(100) NOT NULL,
   `jenis_kelamin` enum('Laki-laki','Perempuan') NOT NULL,
   `diagnosa` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -78,7 +79,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pasien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
